@@ -17,6 +17,15 @@ class RegistrationServiceImpl final : public RegistrationService::Service {
         std::string registration = request->registration();
         std::string name = request->name();
 
+        // Write data to CSV file
+        std::ofstream outfile("registrations.csv", std::ios::app);
+        if (outfile.is_open()) {
+            outfile << registration << "," << name << std::endl;
+            outfile.close();
+        } else {
+            std::cerr << "Failed to open the registrations.csv file." << std::endl;
+        }
+
         std::string message = "Registration: " + registration + "\nName: " + name + "\nData processed successfully.";
         response->set_message(message);
 
@@ -38,6 +47,15 @@ void RunServer() {
 }
 
 int main(int argc, char** argv) {
+// Write data to CSV file
+        std::ofstream outfile("registrations.csv", std::ios::app);
+        if (outfile.is_open()) {
+            outfile << registration << "," << name << std::endl;
+            outfile.close();
+        } else {
+            std::cerr << "Failed to open the registrations.csv file." << std::endl;
+        }
+
     RunServer();
     return 0;
 }
