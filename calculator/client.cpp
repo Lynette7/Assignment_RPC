@@ -10,11 +10,13 @@ using calculator::Calculator;
 using calculator::CalculateRequest;
 using calculator::CalculateResponse;
 
+// Client class for making RPC calls to the calculator server
 class CalculatorClient {
 public:
     CalculatorClient(std::shared_ptr<Channel> channel)
         : stub_(Calculator::NewStub(channel)) {}
 
+    // Method to perform a calculation by making an RPC call to the server
     int calculate(int num1, int num2, std::string op) {
         CalculateRequest request;
         request.set_num1(num1);
@@ -24,9 +26,10 @@ public:
         CalculateResponse response;
         ClientContext context;
 
+        // Call the RPC method on the server and get the response
         Status status = stub_->Calculate(&context, request, &response);
         if (status.ok()) {
-            return response.result();
+            return response.result(); // Return the result if the RPC was successful
         } else {
             std::cout << "RPC failed: " << status.error_code() << ": " << status.error_message() << std::endl;
             return 0; // or handle the error in an appropriate way
@@ -34,7 +37,7 @@ public:
     }
 
 private:
-    std::unique_ptr<Calculator::Stub> stub_;
+    std::unique_ptr<Calculator::Stub> stub_; // gRPC stub for making RPC calls
 };
 
 int main() {
@@ -50,7 +53,7 @@ int main() {
     std::cout << "Enter second number: ";
     std::cin >> num2;
 
-    // Make RPC call to server
+    // Make an RPC call to the server to perform the calculation
     int result = client.calculate(num1, num2, op);
     std::cout << "Result: " << result << std::endl;
 
