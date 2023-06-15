@@ -7,19 +7,22 @@
 
 1. Install gRPC and Protobuf on your Linux system:
 
-Step 1: Install the necessary dependencies
-```
+Step 1: Install the necessary dependencies:
+
+```css
 sudo apt-get update
 sudo apt-get install build-essential autoconf libtool pkg-config
 ```
 
-Step 2: Install gRPC and Protobuf using `apt`
-```
+Step 2: Install gRPC and Protobuf using `apt`:
+
+```css
 sudo apt-get install libgrpc++-dev protobuf-compiler-grpc
 ```
 
-Step 3: Install gRPC C++ Plugin
-```
+Step 3: Install gRPC C++ Plugin:
+
+```css
 sudo apt-get install grpc-compiler
 ```
 
@@ -27,26 +30,38 @@ sudo apt-get install grpc-compiler
 
 - In the same directory as your program, run the following command to compile the Protobuf files:
 
-```
+```css
  protoc --cpp_out=. --grpc_out=. --plugin=protoc-gen-grpc=`which grpc_cpp_plugin` filename.idl.proto
 ```
 
 Replace 'filename' with the actual name of your file. This command generates the necessary C++ files (`filename.idl.pb.h` and `filename.idl.grpc.pb.h`) based on the Protobuf definition (`filename.idl.proto`).
 
-3. Build the Program
+3. Build the server
 
-- Use a C++ compiler to build the program and link against the required gRPC libraries. Assuming you have `g++` installed, you can use the following command:
+- Use a C++ compiler to build the server code and link against the required gRPC libraries. Assuming you have `g++` installed, you can use the following command:
 
-```
-g++ -std=c++11 -o filename_client filename_client.cpp filename.idl.grpc.pb.cc filename.idl.pb.cc -lgrpc++ -lgrpc -lprotobuf -pthread
-```
-
-4. Run the Program
-
-- After the compilation is successful, you can run the program with the following command:
-
-```
-./filename_client
+```c
+g++ -std=c++11 -o server server.cpp filename.idl.grpc.pb.cc filename.idl.pb.cc -lgrpc++ -lgrpc -lprotobuf -pthread
 ```
 
-This will execute the program.
+4. Build the client
+
+```c
+g++ -std=c++11 -o client client.cpp filename.idl.grpc.pb.cc filename.idl.pb.cc -lgrpc++ -lgrpc -lprotobuf -pthread
+```
+
+5. Run the server
+
+- Execute the server program in one terminal window:
+
+```bash
+./server
+```
+
+6. Run the client
+
+- In another terminal window, execute the client program:
+
+```bash
+./client
+```
