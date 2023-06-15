@@ -1,4 +1,4 @@
-# Distributed programs that use then RPC paradigm
+# Distributed programs that use the RPC paradigm
 
 ## Programs
 
