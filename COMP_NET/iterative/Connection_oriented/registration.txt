@@ -1,5 +1,0 @@
-S/no	Registration no		Name	
-_____   ________________        ________
-
-1	P15/1234/2020		Newtoh
-2	P14/1232/2020		ulemsee
