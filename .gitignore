@@ -49,6 +49,8 @@ Mkfile.old
 dkms.conf
 
 # Generate files
+*client
+*server
 *.grpc.pb.cc
 *.grpc.pb.h
 *.pb.cc
