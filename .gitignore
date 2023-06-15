@@ -1,0 +1,5 @@
+# Generate files
+*.grpc.pb.cc
+*.grpc.pb.h
+*.pb.cc
+*.pb.h
